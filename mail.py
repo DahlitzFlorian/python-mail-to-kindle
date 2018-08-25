@@ -10,9 +10,9 @@ class Mail:
         config = configparser.ConfigParser()
         config.read("config.ini")
 
-        self.username = config["DEFAULT"]["email_username"]
-        self.password = config["DEFAULT"]["email_password"]
-        self.imap_url = config["DEFAULT"]["imap_url"]
+        self.username = config["EMAIL"]["email_username"]
+        self.password = config["EMAIL"]["email_password"]
+        self.imap_url = config["EMAIL"]["imap_url"]
         self.file_format = config["DEFAULT"]["file_format"]
         self.tmp_dir_name = config["DEFAULT"]["tmp_dir_name"]
 
