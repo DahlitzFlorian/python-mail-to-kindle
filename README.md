@@ -9,6 +9,7 @@ version 0.1
 
 ## Prerequisites ##
  - [Calibre](https://calibre-ebook.com/) (installs the needed CLI as well)
+ - Changed the default values in the configuration file (Username, Password, IMAP-Server)
 
 ## Configuration ##
 To customize the application for your needs, apply changes to the corresponding configuration file, which is in the root directory and named **config.ini**.
