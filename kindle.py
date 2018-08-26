@@ -1,7 +1,7 @@
 import subprocess
 import configparser
 import os
-from pathlib import Path
+from pathlib import Path, PurePath
 
 
 class Kindle:
@@ -12,6 +12,9 @@ class Kindle:
         self.tmp_dir_name = config["DEFAULT"]["tmp_dir_name"]
         self.file_format = config["DEFAULT"]["file_format"]
         self.flag = False
+
+        self.sender = config["KINDLE"]["sender_address"]
+        self.recipient = config["KINDLE"]["kindle_address"]
     
 
     def convert_files(self):
@@ -22,7 +25,6 @@ class Kindle:
         dir_path = os.path.dirname(os.path.realpath(__file__)) + "\\" + self.tmp_dir_name
         path = Path(dir_path)
         files = path.iterdir()
-        print(files)
 
         for file in files:
             if file.is_file() and file.name.endswith(self.file_format):
@@ -34,3 +36,12 @@ class Kindle:
     def send_files(self):
         if self.flag:
             return
+        
+        dir_path = os.path.dirname(os.path.realpath(__file__)) + "\\" + self.tmp_dir_name
+        path = Path(dir_path)
+        files = path.iterdir()
+
+        for file in files:
+            if file.is_file() and file.name.endswith("mobi"):
+                subprocess.run(["calibre-smtp", "-a", file.name, self.sender, self.recipient, " "],
+                    cwd=self.tmp_dir_name, shell=True)
