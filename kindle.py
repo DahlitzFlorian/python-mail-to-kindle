@@ -1,6 +1,7 @@
 import subprocess
 import configparser
 import os
+import shutil
 from pathlib import Path, PurePath
 
 
@@ -45,3 +46,5 @@ class Kindle:
             if file.is_file() and file.name.endswith("mobi"):
                 subprocess.run(["calibre-smtp", "-a", file.name, self.sender, self.recipient, " "],
                     cwd=self.tmp_dir_name, shell=True)
+        
+        shutil.rmtree(self.tmp_dir_name, ignore_errors=True)
