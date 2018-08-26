@@ -55,7 +55,7 @@ class Mail:
             t, d = self.imap.fetch(mail, "(RFC822)")
             msg = email.message_from_bytes(d[0][1])
             for part in msg.walk():
-                if part.get_content_type() == "application/octet-stream":
+                if "application/epub" in part.get_content_type():
                     if part.get_filename().endswith(f".{self.file_format}"):
                         if not os.path.exists(self.tmp_dir_name):
                             os.makedirs(self.tmp_dir_name)
