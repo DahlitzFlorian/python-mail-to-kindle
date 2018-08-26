@@ -7,6 +7,7 @@ import os
 
 class Mail:
     def __init__(self):
+        print("Get mail configuration data...")
         config = configparser.ConfigParser()
         config.read("config.ini")
 
@@ -41,14 +42,17 @@ class Mail:
     
 
     def logout(self):
+        print("Logout...")
         return self.imap.logout()
 
 
     def inbox(self):
+        print("Select folder: Inbox")
         return self.imap.select("Inbox")
     
 
     def save_attachments(self):
+        print("Save attachments...")
         typ, data = self.imap.search(None, '(SINCE "' + self.today + '")', "ALL")
         mails = data[0].split()
         for mail in mails:
@@ -65,3 +69,4 @@ class Mail:
             
 
         self.imap.close()
+        print("Saved attachments successfully.")
