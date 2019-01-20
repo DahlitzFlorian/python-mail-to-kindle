@@ -1,7 +1,7 @@
-import subprocess
 import configparser
-import os
 import shutil
+import subprocess
+
 from pathlib import Path, PurePath
 
 
@@ -11,7 +11,7 @@ class Kindle:
         config = configparser.ConfigParser()
         config.read("config.ini")
 
-        self.tmp_dir_name = config["DEFAULT"]["tmp_dir_name"]
+        self.tmp_dir_name = Path(config["DEFAULT"]["tmp_dir_name"])
         self.file_format = config["DEFAULT"]["file_format"]
         self.flag = False
 
@@ -19,15 +19,12 @@ class Kindle:
         self.recipient = config["KINDLE"]["kindle_address"]
 
     def convert_files(self):
-        if not os.path.exists(self.tmp_dir_name):
+        if not self.tmp_dir_name.exists():
             self.flag = True
             return
 
         print("Get files to convert...")
-        dir_path = (
-            os.path.dirname(os.path.realpath(__file__)) + "\\" + self.tmp_dir_name
-        )
-        path = Path(dir_path)
+        path = Path().cwd() / self.tmp_dir_name
         files = path.iterdir()
 
         print("Convert files...")
@@ -49,10 +46,7 @@ class Kindle:
             return
 
         print("Get files to send to kindle...")
-        dir_path = (
-            os.path.dirname(os.path.realpath(__file__)) + "\\" + self.tmp_dir_name
-        )
-        path = Path(dir_path)
+        path = Path().cwd() / self.tmp_dir_name
         files = path.iterdir()
 
         print("Send files...")

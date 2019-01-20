@@ -15,7 +15,7 @@ class Mail:
         self.password = config["EMAIL"]["email_password"]
         self.imap_url = config["EMAIL"]["imap_url"]
         self.file_format = config["DEFAULT"]["file_format"]
-        self.tmp_dir_name = config["DEFAULT"]["tmp_dir_name"]
+        self.tmp_dir_name = Path(config["DEFAULT"]["tmp_dir_name"])
 
         self.today = datetime.datetime.now().strftime("%d-%b-%Y")
 
@@ -57,11 +57,9 @@ class Mail:
             for part in msg.walk():
                 if "application/epub" in part.get_content_type():
                     if part.get_filename().endswith(f".{self.file_format}"):
-                        if not os.path.exists(self.tmp_dir_name):
-                            os.makedirs(self.tmp_dir_name)
-                        fp = open(
-                            os.path.join(self.tmp_dir_name, part.get_filename()), "wb"
-                        )
+                        if not self.tmp_dir_name.exists():
+                            self.tmp_dir_name.mkdir(exist_ok=True, parents=True)
+                        fp = open(self.tmp_dir_name / part.get_filename(), "wb")
                         fp.write(part.get_payload(decode=1))
                         fp.close
 
