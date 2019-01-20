@@ -1,0 +1,12 @@
+# Project files
+README.md
+LICENSE
+Pipfile.lock
+
+# git
+.git/
+.gitignore
+
+# __pycache__
+__pycache__/
+*/__pycache__/
