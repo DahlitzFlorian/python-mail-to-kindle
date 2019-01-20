@@ -1,8 +1,9 @@
-import imaplib
-import email
-import datetime
 import configparser
-import os
+import datetime
+import email
+import imaplib
+
+from pathlib import Path
 
 
 class Mail:
