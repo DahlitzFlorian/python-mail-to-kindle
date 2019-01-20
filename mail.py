@@ -22,7 +22,6 @@ class Mail:
         self.login()
         self.inbox()
 
-    
     def login(self):
         while True:
             try:
@@ -32,24 +31,21 @@ class Mail:
                 if r != "OK":
                     print("Login failed.\n")
                     raise ConnectionError
-                
+
                 print(" > Sign as ", d)
             except:
                 print(" > Sign In ...")
                 continue
             # self.imap.logout()
             break
-    
 
     def logout(self):
         print("Logout...")
         return self.imap.logout()
 
-
     def inbox(self):
         print("Select folder: Inbox")
         return self.imap.select("Inbox")
-    
 
     def save_attachments(self):
         print("Save attachments...")
@@ -63,10 +59,11 @@ class Mail:
                     if part.get_filename().endswith(f".{self.file_format}"):
                         if not os.path.exists(self.tmp_dir_name):
                             os.makedirs(self.tmp_dir_name)
-                        fp = open(os.path.join(self.tmp_dir_name, part.get_filename()), "wb")
+                        fp = open(
+                            os.path.join(self.tmp_dir_name, part.get_filename()), "wb"
+                        )
                         fp.write(part.get_payload(decode=1))
                         fp.close
-            
 
         self.imap.close()
         print("Saved attachments successfully.")
