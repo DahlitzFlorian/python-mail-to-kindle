@@ -1,4 +1,5 @@
 # Mail to Kindle #
+![black](https://img.shields.io/badge/code%20style-black-000000.svg)
 ## Description ##
 This projects helps you saving your mail attachments (e.g. epub-files, PDFs) to a
 temporary directory, convert the files to MOBI-format and send them directly
