@@ -35,7 +35,6 @@ class Kindle:
                 subprocess.run(
                     ["ebook-convert", file.name, file_mobi],
                     cwd=self.tmp_dir_name,
-                    shell=True,
                 )
 
         print("-" * 40)
@@ -55,7 +54,6 @@ class Kindle:
                 subprocess.run(
                     ["calibre-smtp", "-a", file.name, self.sender, self.recipient, " "],
                     cwd=self.tmp_dir_name,
-                    shell=True,
                 )
 
         print("Files were send.")
