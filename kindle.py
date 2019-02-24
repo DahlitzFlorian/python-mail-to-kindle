@@ -33,8 +33,7 @@ class Kindle:
             if file.is_file() and file.name.endswith(self.file_format):
                 file_mobi = file.stem + ".mobi"
                 subprocess.run(
-                    ["ebook-convert", file.name, file_mobi],
-                    cwd=self.tmp_dir_name,
+                    ["ebook-convert", file.name, file_mobi], cwd=self.tmp_dir_name
                 )
 
         print("-" * 40)
