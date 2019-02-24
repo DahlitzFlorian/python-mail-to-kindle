@@ -3,6 +3,7 @@ FROM floriandahlitz/docker-calibre:latest
 USER worker
 WORKDIR /home/worker
 
+RUN python -m pip install --upgrade pip
 RUN python -m pip install pipenv
 
 COPY Pipfile Pipfile
