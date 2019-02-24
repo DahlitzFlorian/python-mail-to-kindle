@@ -6,7 +6,7 @@ temporary directory, convert the files to MOBI-format and send them directly
 to your Kindle, so that you can read them later and do not have to do all
 this by hand.
 
-version 1.0.1
+version 1.1.1
 
 ## Prerequisites ##
  - [Calibre](https://calibre-ebook.com/) (installs the needed CLI as well)
